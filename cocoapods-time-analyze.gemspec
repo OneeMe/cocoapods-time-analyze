@@ -8,16 +8,19 @@ Gem::Specification.new do |spec|
   spec.version       = CocoapodsTimeAnalyze::VERSION
   spec.authors       = ['Forelax']
   spec.email         = ['helloworldmkv@163.com']
-  spec.description   = %q{A short description of cocoapods-time-analyze.}
-  spec.summary       = %q{A longer description of cocoapods-time-analyze.}
-  spec.homepage      = 'https://github.com/EXAMPLE/cocoapods-time-analyze'
+  spec.description   = %q{A cocoapods plugin to analyze time of cocoapods pod install and xcodebuild.}
+  spec.summary       = %q{A cocoapods plugin to analyze time of cocoapods pod install and xcodebuild.}
+  spec.homepage      = 'https://github.com/Forelax/cocoapods-time-analyze'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'cocoapods', '~> 1.5'
 end

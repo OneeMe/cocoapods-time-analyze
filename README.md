@@ -10,13 +10,19 @@ $ gem install cocoapods-time-analyze
 $ bundle add cocoapods-time-analyze
 ```
 
+Then add this to your podfile:
+
+```ruby
+plugin 'cocoapods-time-analyze'
+```
+
 ## Usage
 
 ### Pod install time analyze
 
 After install, use `pod time init` to do init job.
 
-Then you can see the `.cocoapods-time-analyze.rb` file under the .xcworkspace directory.
+Then you can see the `.cocoapods_time_analyze.rb` file under the .xcworkspace directory.
 
 Use this file to config the behaviour.
 
@@ -30,17 +36,13 @@ module TimeAnalyzeConfig
     end
     # add the step you want to analyze to this method
     def self.target_steps
-        %w{
-        prepare
-        resolve_dependencies
-        generate_pods_project
-        }
+      %w[prepare resolve_dependencies generate_pods_project]
     end
     # do anything you want to do after pod install, for example, you can send the result to a server
     # @param total_time [Float] pod install totoal time, in millisecond
     # @param detail [Hash] analyze result in hash format, the key is the step name, value is the duration in millisecond.
     def self.after_all(total_time, detail)
-        # something awesome
+      # something awesome
     end
   end
 end
@@ -56,7 +58,7 @@ exec > $PODS_ROOT/cocoapods-time-analyze-post-build.log 2>&1
 ruby $PODS_ROOT/analyze_build.rb
 ```
 
-If you want to config the behaviour, you can also open the `.cocoapods-time-analyze.rb` file to config it.
+If you want to config the behaviour, you can also open the `.cocoapods_time_analyze.rb.rb` file to config it.
 
 ```ruby
 module TimeAnalyzeConfig
@@ -72,7 +74,7 @@ module TimeAnalyzeConfig
     # @option opts [Integer] :binary_size The size of the binary in final .app product
     # @option opts [Integer] :other_size The size of things except binary size in final .app product
     def self.after_all(total_time, detail)
-        # something awesome
+      # something awesome
     end
   end
 end
