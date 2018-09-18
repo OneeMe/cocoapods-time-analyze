@@ -7,12 +7,12 @@ RSpec::Matchers.define :a_approximate_hash_of do |x|
 end
 
 describe 'InstallHook' do
-  let(:target_steps) { %w[prepare resolve_dependencies download_dependencies validate_targets generate_pods_project integrate_user_project perform_post_install_actions]  }
+  let(:target_steps) { %w[prepare resolve_dependencies download_dependencies validate_targets generate_pods_project integrate_user_project perform_post_install_actions] }
   let(:installer) { Pod::Installer.new(nil, nil) }
   let(:installation_options) { double('installation_options') }
   let(:expected_detail) { target_steps.each_with_object({}) { |step, hash| hash[step.to_sym] = 0.1 } }
   let(:expected_total_time) { target_steps.count * 0.1 }
-  let!(:summary_file_content) { File.read(File.expand_path('../fixtures/pod-install-summary.yml', __FILE__)) }
+  let!(:summary_file_content) { File.read(File.expand_path('fixtures/pod-install-summary.yml', __dir__)) }
 
   before do
     allow(TimeAnalyzeConfig::PodInstall).to receive(:target_steps).and_return(target_steps)
