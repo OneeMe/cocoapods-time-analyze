@@ -2,7 +2,7 @@ require 'fakefs/safe'
 
 RSpec::Matchers.define :a_approximate_hash_of do |x|
   match do |actual|
-    actual.all? { |k, v| (x[k] - v).abs < 0.5 }
+    actual.all? { |k, v| (x[k] - v).abs < 0.05 }
   end
 end
 
@@ -13,12 +13,13 @@ describe 'InstallHook' do
   let(:expected_detail) { target_steps.each_with_object({}) { |step, hash| hash[step.to_sym] = 0.1 } }
   let(:expected_total_time) { target_steps.count * 0.1 }
   let!(:summary_file_content) { File.read(File.expand_path('fixtures/pod-install-summary.yml', __dir__)) }
-
+  
   before do
     allow(TimeAnalyzeConfig::PodInstall).to receive(:target_steps).and_return(target_steps)
     allow(TimeAnalyzeConfig::PodInstall).to receive(:after_all)
     allow(installer).to receive(:installation_options).and_return(installation_options)
     allow(installation_options).to receive(:integrate_targets?).and_return(true)
+    allow_any_instance_of(Date).to receive(:to_s).and_return('2018-09-18')
 
     target_steps.each do |step|
       allow(installer).to receive("origin_#{step}") { sleep(0.1) }
@@ -37,7 +38,7 @@ describe 'InstallHook' do
 
   it 'call the after_all hook in config file' do
     expect(TimeAnalyzeConfig::PodInstall).to have_received(:after_all).with(
-      be_within(0.5).of(expected_total_time),
+      be_within(0.05).of(expected_total_time),
       a_approximate_hash_of(expected_detail)
     )
   end
