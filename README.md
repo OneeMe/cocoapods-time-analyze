@@ -16,13 +16,13 @@ Then add this to your podfile:
 plugin 'cocoapods-time-analyze'
 ```
 
+Then run `pod install`.
+
 ## Usage
 
 ### Pod install time analyze
 
-After install, use `pod time init` to do init job.
-
-Then you can see the `.cocoapods_time_analyze.rb` file under the .xcworkspace directory.
+Create the `.cocoapods_time_analyze.rb` file under the Podfile  directory.
 
 Use this file to config the behaviour.
 

@@ -1,5 +1,5 @@
 require 'cocoapods-time-analyze/config-loader/config_loader'
-require 'cocoapods-time-analyze/install-hook/const'
+require 'cocoapods-time-analyze/const'
 require 'yaml'
 
 module Pod
