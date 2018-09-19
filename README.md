@@ -22,7 +22,7 @@ Then run `pod install`.
 
 ### Pod install time analyze
 
-Create the `.cocoapods_time_analyze.rb` file under the Podfile  directory.
+Create the `.cocoapods_time_analyze_config.rb` file under the Podfile  directory.
 
 Use this file to config the behaviour.
 
@@ -58,7 +58,7 @@ exec > $PODS_ROOT/cocoapods-time-analyze-post-build.log 2>&1
 ruby $PODS_ROOT/analyze_build.rb
 ```
 
-If you want to config the behaviour, you can also open the `.cocoapods_time_analyze.rb.rb` file to config it.
+If you want to config the behaviour, you can also open the `.cocoapods_time_analyze_config.rb` file to config it.
 
 ```ruby
 module TimeAnalyzeConfig

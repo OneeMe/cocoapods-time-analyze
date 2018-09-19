@@ -22,7 +22,7 @@ module Pod
       if method_defined?(method_sym)
         alias_method "origin_#{method_sym}".to_sym, method_sym
       else
-        UI.puts "Pod::Installer does not have method named #{method_sym}, please check your .cocoapods_time_analyze.rb config file"
+        UI.puts "Pod::Installer does not have method named #{method_sym}, please check your .cocoapods_time_analyze_config.rb config file"
       end
     end
 

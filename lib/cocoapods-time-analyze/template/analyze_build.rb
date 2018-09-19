@@ -7,7 +7,7 @@ app_path = ENV['CODESIGNING_FOLDER_PATH']
 executable_path = File.join(app_path, File.basename(app_path, '.app'))
 pods_root = ENV['PODS_ROOT']
 config_dir = File.dirname(pods_root)
-config_file_path = File.join(config_dir, 'cocoapods_time_analyze.rb')
+config_file_path = File.join(config_dir, '.cocoapods_time_analyze_config.rb')
 
 load config_file_path
 
