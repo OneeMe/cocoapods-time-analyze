@@ -19,10 +19,10 @@ module Pod
     end
 
     def self.alias_step_method(method_sym)
-      if method_defined?(method_sym)
+      if method_defined?(method_sym) || private_method_defined?(method_sym)
         alias_method "origin_#{method_sym}".to_sym, method_sym
       else
-        UI.puts "Pod::Installer does not have method named #{method_sym}, please check your .cocoapods_time_analyze_config.rb config file"
+        raise "Pod::Installer does not have method named #{method_sym}, please check your .cocoapods_time_analyze_config.rb config file"
       end
     end
 

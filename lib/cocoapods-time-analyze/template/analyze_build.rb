@@ -1,5 +1,6 @@
 require 'json'
 require 'yaml'
+require 'pp'
 
 workspace_dir = ENV['BUILD_DIR'].gsub('Build/Products', '')
 build_log_path = File.join(workspace_dir, 'Logs/Build/LogStoreManifest.plist')
@@ -19,15 +20,17 @@ log_content = JSON.parse(File.read(json_log_file))
 `rm -rf #{json_log_file}`
 
 end_time_with_duration = log_content['logs'].each_with_object({}) do |log_content, hash|
-  start_timestamp = log_content.last.values.first['timeStartedRecording'].to_i
-  end_timestamp = log_content.last.values.first['timeStoppedRecording'].to_i
+  start_timestamp = log_content.last['timeStartedRecording'].to_i
+  end_timestamp = log_content.last['timeStoppedRecording'].to_i
   duration = end_timestamp - start_timestamp
   hash[end_timestamp] = duration
 end
 
 last_build_duration = end_time_with_duration[end_time_with_duration.keys.sort.last]
 executable_size = File.size(executable_path)
-otherthing_size = File.size(app_path) - executable_size
+app_size = `du -sk #{app_path}`.split(' ').first.strip.to_i * 1024
+
+otherthing_size = app_size - executable_size
 
 TimeAnalyzeConfig::Build.after_all(last_build_duration, { binary_size: executable_size, other_size: otherthing_size })
 
@@ -36,10 +39,10 @@ if TimeAnalyzeConfig::Build.enable_local_summary
   file_path = File.join(config_dir, file_name)
   today = Date.today.to_s
   summary_total_time = last_build_duration.to_i
-  summary = File.exist?(file_name) ? YAML.safe_load(File.read(file_name)) : {}
+  summary = File.exist?(file_path) ? YAML.safe_load(File.read(file_path)) : {}
   summary['total_time'] = summary['total_time'] ? summary['total_time'] + summary_total_time : summary_total_time
   summary['detail'] ||= {}
-  summary['detail'][today] = summary['detail'][today] ? summary['detail'][today] + summary_total_time : summary_total_time
+  summary['detail'][today] = (summary['detail'][today] ? summary['detail'][today] + summary_total_time : summary_total_time)
   File.open file_path, 'w+' do |file|
     file.write(YAML.dump(summary))
   end
