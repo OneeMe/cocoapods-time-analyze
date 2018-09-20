@@ -127,13 +127,13 @@ DEPENDENCIES
   cocoapods (~> 1.5)
   cocoapods-time-analyze!
   debase
-  fakefs
-  gem-release
-  pry-byebug
-  rake
-  rspec
-  rubocop
-  ruby-debug-ide
+  fakefs (~> 0.13)
+  gem-release (~> 2.0)
+  pry-byebug (~> 3.6)
+  rake (~> 12.3)
+  rspec (~> 3.7)
+  rubocop (~> 0.58)
+  ruby-debug-ide (~> 0.6)
 
 BUNDLED WITH
    1.16.3
