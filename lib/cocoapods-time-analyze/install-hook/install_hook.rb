@@ -12,7 +12,7 @@ module Pod
       TimeAnalyzeConfig::PodInstall.target_steps.each { |step| redefine_step_method(step.to_sym) }
       install_start_time = Time.now
       origin_install!
-      total_time = Time.now - install_start_time
+      total_time = (Time.now - install_start_time).round(2)
 
       TimeAnalyzeConfig::PodInstall.after_all(total_time, @time_log, self)
       write_summary_file(total_time) if TimeAnalyzeConfig::PodInstall.enable_local_summary
@@ -34,7 +34,7 @@ module Pod
       block = proc do |*arguments|
         start_time = Time.now
         send("origin_#{method_sym}".to_sym, *arguments)
-        total_time = Time.now - start_time
+        total_time = (Time.now - start_time).round(2)
         @time_log[method_sym] = total_time
       end
 

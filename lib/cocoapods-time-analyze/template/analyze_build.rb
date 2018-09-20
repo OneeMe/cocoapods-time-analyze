@@ -20,8 +20,8 @@ log_content = JSON.parse(File.read(json_log_file))
 `rm -rf #{json_log_file}`
 
 end_time_with_duration = log_content['logs'].each_with_object({}) do |log_content, hash|
-  start_timestamp = log_content.last['timeStartedRecording'].to_i
-  end_timestamp = log_content.last['timeStoppedRecording'].to_i
+  start_timestamp = log_content.last['timeStartedRecording'].round(2)
+  end_timestamp = log_content.last['timeStoppedRecording'].round(2)
   duration = end_timestamp - start_timestamp
   hash[end_timestamp] = duration
 end
