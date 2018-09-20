@@ -14,7 +14,7 @@ module Pod
       origin_install!
       total_time = Time.now - install_start_time
 
-      TimeAnalyzeConfig::PodInstall.after_all(total_time, @time_log)
+      TimeAnalyzeConfig::PodInstall.after_all(total_time, @time_log, self)
       write_summary_file(total_time) if TimeAnalyzeConfig::PodInstall.enable_local_summary
     end
 

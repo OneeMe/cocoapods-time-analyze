@@ -39,7 +39,8 @@ describe 'InstallHook' do
   it 'call the after_all hook in config file' do
     expect(TimeAnalyzeConfig::PodInstall).to have_received(:after_all).with(
       be_within(0.05).of(expected_total_time),
-      a_approximate_hash_of(expected_detail)
+      a_approximate_hash_of(expected_detail),
+      an_instance_of(Pod::Installer)
     )
   end
 

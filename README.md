@@ -39,14 +39,17 @@ module TimeAnalyzeConfig
       %w[prepare resolve_dependencies generate_pods_project]
     end
     # do anything you want to do after pod install, for example, you can send the result to a server
-    # @param total_time [Float] pod install totoal time, in second
+    # this method will be executed in the directory the `pod install` command called.  
+    # @param total_time [Float] pod install total time, in second
     # @param detail [Hash] analyze result in hash format, the key is the step name, value is the duration in second.
-    def self.after_all(total_time, detail)
+    # @param installer [Pod::Installer] instance of Pod::Installer of this install process
+    def self.after_all(total_time, detail, installer)
       # something awesome
     end
   end
 end
 ```
+
 ### Build time analyze
 
 Open Xcode, add this script to the post build action of scheme you want to analyze:
@@ -69,7 +72,9 @@ module TimeAnalyzeConfig
       true
     end
     # do anything you want to do after build, for example, you can send the result to a server
-    # @param total_time [Float] build totoal time, in second
+    # this method will be executed under Xcode derived data directory, and you can use ENV to
+    # fetch environment variables of xcode build
+    # @param total_time [Float] build total time, in second
     # @param detail [Hash] analyze result in hash format
     # @option opts [Integer] :binary_size The size of the binary in final .app product
     # @option opts [Integer] :other_size The size of things except binary size in final .app product
