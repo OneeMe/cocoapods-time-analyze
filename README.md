@@ -52,7 +52,7 @@ end
 
 ### Build time analyze
 
-Open Xcode, add this script to the post build action of scheme you want to analyze:
+Open Xcode, add this script to the post build action of scheme you want to analyze(Remeber open the `Provide Build Settings From` option of Xcode):
 
 ```shell
 # script in xcode scheme post build action does not display 
