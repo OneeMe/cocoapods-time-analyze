@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocoapods-time-analyze (0.0.2)
+    cocoapods-time-analyze (0.0.4)
 
 GEM
   remote: https://gems.ruby-china.com/
