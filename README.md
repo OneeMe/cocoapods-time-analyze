@@ -1,5 +1,7 @@
 # cocoapods-time-analyze
 
+[![Build Status](https://travis-ci.org/ForelaxX/cocoapods-time-analyze.svg?branch=master)](https://travis-ci.org/ForelaxX/cocoapods-time-analyze)
+
 cocoapods-time-analyze is used to display the time spent by every step of  `pod install` and total time of xcode build.
 
 ## Installation
